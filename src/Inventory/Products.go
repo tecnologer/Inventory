@@ -1,12 +1,5 @@
 package Inventory
 
-import (
-	"fmt"
-	"regexp"
-
-	"github.com/fatih/color"
-)
-
 type Product struct {
 	ID          int
 	Description string
@@ -43,33 +36,48 @@ func New(id int, desc string, price float32, productType Type, qty float32) {
 	inventory = append(inventory, newProduct)
 }
 
-//GetProducts prints the products saved
-func GetProducts() {
-	var header = fmt.Sprintf("|%-10s | %-25s | %-16s | %-16s | %-7s|", "Id", "Descripcion", "Precio", "Cantidad", "Tipo")
-	color.Green(header)
-	var reg, _ = regexp.Compile(`.`)
-	var headerSeparator = reg.ReplaceAllString(header, "-")
-	color.Green(headerSeparator)
-	for _, p := range inventory {
-		color.White(fmt.Sprintf("|%10d | %-25s | %16f | %16f | %-7s|\n", p.ID, p.Description, p.Price, p.Qty, TypeString(p.Type)))
-	}
-	color.Green(headerSeparator)
+//GetProducts returns list of products
+func GetProducts() []Product {
+	return inventory
 }
 
 //Exists return if the id of product is already in inventory slice
 func Exists(id int) bool {
-	for _, p := range inventory {
+	return indexOf(id) >= 0
+}
+
+func indexOf(id int) int {
+	for i, p := range inventory {
 		if p.ID == id {
-			return true
+			return i
 		}
 	}
 
-	return false
+	return -1
 }
 
-//TypeString returns the string value of product type
-func TypeString(productType Type) string {
-	switch productType {
+//Delete product of the list
+func Delete(id int) {
+	var index = indexOf(id)
+	inventory = append(inventory[:index], inventory[index+1:]...)
+}
+
+//Update infor of product
+func Update(id int, desc string, price float32, productType Type) {
+	i := indexOf(id)
+	inventory[i].Description = desc
+	inventory[i].Price = price
+	inventory[i].Type = productType
+}
+
+//InventoryMovement increase qty in specific product
+func InventoryMovement(id int, qty float32) {
+	i := indexOf(id)
+	inventory[i].Qty += qty
+}
+
+func (p Product) TypeString() string {
+	switch p.Type {
 	case Item:
 		return "Producto"
 	case Service:
