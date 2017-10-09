@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/Tecnologer/Strings"
+	"github.com/Tecnologer/ASCIIArt"
 	"github.com/fatih/color"
 )
 
