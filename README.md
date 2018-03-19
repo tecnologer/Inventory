@@ -4,4 +4,6 @@ Sencillo programa para Crear, Leer, Modificar y Eliminar productos. Intentando s
 ### Dependencias
 ```
 go get github.com/tecnologer/ASCIIArt
+
+go get github.com/fatih/color
 ```
