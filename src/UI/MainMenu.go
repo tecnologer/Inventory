@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/Tecnologer/ASCIIArt"
 	"github.com/fatih/color"
+	"github.com/tecnologer/asciiart"
 )
 
 //MainMenu interface

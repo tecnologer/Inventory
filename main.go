@@ -8,10 +8,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Tecnologer/Inventory/src/Inventory"
-
-	"github.com/Tecnologer/Inventory/src/UI"
 	"github.com/fatih/color"
+	"github.com/tecnologer/inventory/src/Inventory"
+	"github.com/tecnologer/inventory/src/UI"
 )
 
 var err error
@@ -80,6 +79,8 @@ func selectOption(option int) (bool, bool) {
 		return true, true
 	case 7: //exit
 		fmt.Println("Cerrando sesion...")
+		Inventory.CloseDB()
+
 		for i := 0; i < 3; i++ {
 			fmt.Println(3 - i)
 			time.Sleep(500 * time.Millisecond)
@@ -135,12 +136,15 @@ func deleteProduct() {
 //#region Input
 func readID() int {
 	var id int
-	for err != nil || id <= 0 || Inventory.Exists(id) {
+	for err != nil || id <= 0 {
 		fmt.Print("ID: ")
 		_, err = fmt.Scan(&id)
 
-		if id <= 0 || Inventory.Exists(id) {
+		if id <= 0 {
 			fmt.Println("Id invalido, intenta de nuevo.")
+		} else if Inventory.Exists(id) {
+			fmt.Println("Id ya esta registrado.")
+			id = 0
 		}
 	}
 	return id
