@@ -1,4 +1,4 @@
-# Inventario
+# Inventario [![Build Status](https://travis-ci.org/Tecnologer/Inventory.svg?branch=master)](https://travis-ci.org/Tecnologer/Inventory)
 
 Sencillo programa para Crear, Leer, Modificar y Eliminar productos. 
 Utilizando una base de datos en Postgres.
