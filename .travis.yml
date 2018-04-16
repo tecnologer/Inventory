@@ -5,4 +5,8 @@ os:
 go:
   - "1.10.x"
   - master
+before_install:
+  - go get github.com/tecnologer/asciiart
+  - go get github.com/fatih/color
+  - go get github.com/lib/pq  
 go_import_path: github.com/tecnologer/inventory
