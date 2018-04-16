@@ -16,10 +16,13 @@ go get github.com/fatih/color
 go get github.com/lib/pq
 ```
 
+
 ### Uso
 
 1. Primero hay que clonar el repositorio en `$GOPATH/src/github.com/tecnologer` <br/>
     `git clone https://github.com/Tecnologer/Inventory.git inventory`
 2. Entrar a la carpeta del repositorio: <br/> `cd $GOPATH/src/github.com/tecnologer/inventory`
 3. Instalar dependencias
-4. `go run main.go`
+4. Instalar Postgres
+5. Configurar la base de datos `test` y al usuario `postgres` con su contraseña `postgres`. Utilizar el script `/src/Inventory/queries_postgres.sql` para crear la base de datos y sus tablas.
+6. `go run main.go`
