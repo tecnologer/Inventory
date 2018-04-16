@@ -23,6 +23,9 @@ go get github.com/lib/pq
     `git clone https://github.com/Tecnologer/Inventory.git inventory`
 2. Entrar a la carpeta del repositorio: <br/> `cd $GOPATH/src/github.com/tecnologer/inventory`
 3. Instalar dependencias
-4. Instalar Postgres
+4. Instalar [Postgres][1]
 5. Configurar la base de datos `test` y al usuario `postgres` con su contraseña `postgres`. Utilizar el script `/src/Inventory/queries_postgres.sql` para crear la base de datos y sus tablas.
 6. `go run main.go`
+
+
+[1]: https://wiki.postgresql.org/wiki/Main_Page
