@@ -27,5 +27,8 @@ go get github.com/lib/pq
 5. Configurar la base de datos `test` y al usuario `postgres` con su contraseña `postgres`. Utilizar el script `/src/Inventory/queries_postgres.sql` para crear la base de datos y sus tablas.
 6. `go run main.go`
 
+Como instalar y configurar Go?... click [aqui][2].
+
 
 [1]: https://wiki.postgresql.org/wiki/Main_Page
+[2]: https://golang.org/doc/install
