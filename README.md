@@ -31,6 +31,7 @@ Como instalar y configurar Go?... click [aqui][2].
 
 ### Usar API
 
+1. Instalar dependencia: `go get github.com/gorilla/mux`
 1. Entrar al folder donde esta el codigo `cd $GOPATH/src/github.com/tecnologer/inventory/src/api`
 2. Ejecutar el archivo principal `go run main.go`
 3. Una vez instalado [Postman][3], abrirlo y presionar importar
