@@ -23,7 +23,7 @@ func init() {
 	checkErr(err)
 }
 
-func insertNewProduct(p Product) (int, error) {
+func InsertNewProduct(p Product) (int, error) {
 	var lastInsertId int
 	err := db.QueryRow("INSERT INTO Product(Id, Description, Price, Type, Quantity) VALUES($1,$2,$3, $4, $5) returning Id;",
 		p.ID,
@@ -40,7 +40,7 @@ func insertNewProduct(p Product) (int, error) {
 	return lastInsertId, nil
 }
 
-func getProducts() ([]Product, error) {
+func GetProducts() ([]Product, error) {
 	var list []Product
 	rows, err := db.Query("SELECT * FROM Product")
 	if err != nil {
@@ -62,7 +62,28 @@ func getProducts() ([]Product, error) {
 	return list, nil
 }
 
-func existsProduct(id int) (bool, error) {
+func GetProduct(id int) (Product, error) {
+	var p = Product{}
+	rows, err := db.Query("SELECT * FROM Product WHERE ID=$1", id)
+	if err != nil {
+		return Product{}, err
+	}
+
+	for rows.Next() {
+
+		err = rows.Scan(&p.ID, &p.Description, &p.Price, &p.Type, &p.Qty)
+
+		if err != nil {
+			return p, err
+		}
+
+		break
+	}
+
+	return p, nil
+}
+
+func ExistsProduct(id int) (bool, error) {
 	var exists bool
 	rows, err := db.Query("SELECT EXISTS(SELECT 1 FROM product WHERE ID=$1)", id)
 	if err != nil {
@@ -80,7 +101,7 @@ func existsProduct(id int) (bool, error) {
 	return exists, nil
 }
 
-func deleteProduct(id int) error {
+func DeleteProduct(id int) error {
 	stmt, err := db.Prepare("DELETE FROM product WHERE ID=$1")
 	if err != nil {
 		return err
@@ -100,7 +121,7 @@ func deleteProduct(id int) error {
 	return nil
 }
 
-func updateProduct(id int, desc string, price float32, productType Type) error {
+func UpdateProduct(id int, desc string, price float32, productType Type) error {
 	stmt, err := db.Prepare("UPDATE product SET Description=$2, Price=$3, Type=$4 WHERE ID=$1")
 	if err != nil {
 		return err
@@ -120,7 +141,7 @@ func updateProduct(id int, desc string, price float32, productType Type) error {
 	return nil
 }
 
-func addMovement(id int, qty float32) error {
+func AddMovement(id int, qty float32) error {
 	stmt, err := db.Prepare("UPDATE product SET Quantity=Quantity+$2 WHERE ID=$1")
 	if err != nil {
 		return err

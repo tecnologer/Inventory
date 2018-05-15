@@ -242,7 +242,7 @@ func showProducts() {
 	var reg, _ = regexp.Compile(`.`)
 	var headerSeparator = reg.ReplaceAllString(header, "-")
 	color.Green(headerSeparator)
-	for _, p := range Inventory.GetProducts() {
+	for _, p := range Inventory.GetProductsList() {
 		color.White(fmt.Sprintf("|%10d | %-25s | %16f | %16f | %-10s|\n", p.ID, p.Description, p.Price, p.Qty, p.TypeString()))
 	}
 	color.Green(headerSeparator)
