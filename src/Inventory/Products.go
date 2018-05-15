@@ -3,11 +3,11 @@ package Inventory
 import "fmt"
 
 type Product struct {
-	ID          int
-	Description string
-	Price       float32
-	Type        Type
-	Qty         float32
+	ID          int     `json:"id,omitempty"`
+	Description string  `json:"description,omitempty"`
+	Price       float32 `json:"price,omitempty"`
+	Type        Type    `json:"type,omitempty"`
+	Qty         float32 `json:"qty,omitempty"`
 }
 
 type Type int
@@ -35,7 +35,7 @@ func New(id int, desc string, price float32, productType Type, qty float32) {
 		Qty:         qty,
 	}
 
-	_, err := insertNewProduct(newProduct)
+	_, err := InsertNewProduct(newProduct)
 
 	if err != nil {
 		fmt.Printf("Error when try insert new product. %s\n", err)
@@ -44,8 +44,8 @@ func New(id int, desc string, price float32, productType Type, qty float32) {
 }
 
 //GetProducts returns list of products
-func GetProducts() []Product {
-	list, err := getProducts()
+func GetProductsList() []Product {
+	list, err := GetProducts()
 	if err != nil {
 		fmt.Printf("Error when try get products %s\n", err)
 		return nil
@@ -56,7 +56,7 @@ func GetProducts() []Product {
 
 //Exists return if the id of product is already in inventory slice
 func Exists(id int) bool {
-	exists, err := existsProduct(id)
+	exists, err := ExistsProduct(id)
 	if err != nil {
 		fmt.Printf("Error when try chek if product exists. %s\n", err)
 		return true
@@ -79,7 +79,7 @@ func indexOf(id int) int {
 func Delete(id int) {
 	// var index = indexOf(id)
 	// inventory = append(inventory[:index], inventory[index+1:]...)
-	err := deleteProduct(id)
+	err := DeleteProduct(id)
 	if err != nil {
 		fmt.Printf("Error when try delete product. %s\n", err)
 	}
@@ -91,7 +91,7 @@ func Update(id int, desc string, price float32, productType Type) {
 	// inventory[i].Description = desc
 	// inventory[i].Price = price
 	// inventory[i].Type = productType
-	err := updateProduct(id, desc, price, productType)
+	err := UpdateProduct(id, desc, price, productType)
 	if err != nil {
 		fmt.Printf("Error when try update %d. %s\n", id, err)
 	}
@@ -101,7 +101,7 @@ func Update(id int, desc string, price float32, productType Type) {
 func InventoryMovement(id int, qty float32) {
 	// i := indexOf(id)
 	// inventory[i].Qty += qty
-	err := addMovement(id, qty)
+	err := AddMovement(id, qty)
 	if err != nil {
 		fmt.Printf("Error when try update quantity of %d. %s\n", id, err)
 	}
